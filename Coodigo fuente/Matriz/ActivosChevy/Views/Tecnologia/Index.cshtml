@@ -1,0 +1,161 @@
+@model ActivosChevy.Models.TecnologiaModel
+
+@{
+    ViewBag.Title = "Gestión Tecnología";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head runat="server">
+    <title>Matriz</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">*@
+
+    <style>
+        .off {
+            display: none;
+        }
+
+        .color_blue_chevy {
+            background-color: #094997;
+            color: white;
+        }
+
+        h1 {
+            font-size: 25px !important;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    @if (Model.estado)
+    {
+        <hr />
+        <div class="container">
+            <div class="row">
+                <form id="loginForm" runat="server">
+                    <div class="col-md-12">
+                        <div class="col-md-8" style="padding-left: 15px;">
+                            <h1 class="color_blue_chevy" style="padding-left: 205px;">Gestión Tecnología</h1>
+
+                        </div>
+                        <div class="col-md-4 ">
+                            <img style="background-color: white;" width="250px" height="50px" src="../images/logo.png" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right" style="padding-right: 43px">
+
+                        <h2>- @DateTime.Now - </h2>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 text-center ">
+                            <h4 class="color_blue_chevy">Información de Usuario</h4>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <br />
+
+                            <label>Número de Documento Identidad</label>
+                            <input type="button" onclick="return BuscarCreado()" value="BuscarCreado" class="wpcf7-form-control wpcf7-submit"/>
+                            <input required="required" runat="server" id="Identidad" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+
+
+
+                            <hr />
+
+                        </div>
+                        @*                     <div class="col-md-12 text-center">
+
+
+                            </div>*@
+                        <div class="col-md-6">
+                            <br />
+                            <label>Correo</label>
+                            <input required="required" runat="server" id="Correo" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Usuario Windows</label>
+                            <input required="required" runat="server" id="ConUsuario" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>1 USUARIO SICO</label>
+                            <input required="required" runat="server" id="SicoUsu" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>2 USUARIO SICO </label>
+                            <input runat="server" id="SicoUsuario2" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <br />
+                            <label>Nombre Usuario</label>
+                            <input required="required" runat="server" id="Usuario" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+
+                            <label>CLAVE</label>
+                            <input required="required" runat="server" id="ClaveUsuario" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+
+                            <label>CLAVE</label>
+                            <input required="required" runat="server" value="USAR CLAVE DE CORREO" id="ClaveSico" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+
+                            <label>CLAVE </label>
+                            <input runat="server" id="ClaveSico2" value="DEJAR EN BLANCO" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                        </div>
+                </form>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="col-md-12 text-center ">
+            <h4 class="color_blue_chevy">Observaciones</h4>
+        </div>
+
+        <div class="col-md-12 text-center ">
+            <p>
+                <label>Por favor, introduzca sus observaciones: </label>
+                <br>
+                <textarea rows="3" cols="150" name="txtsugerencias" id="OBSERVACIONES"></textarea><br>
+            </p>
+
+        </div>
+        <div class="col-md-6">
+            <br />
+            <label>PARA:</label>
+            <input required="required" runat="server" id="To" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+            <hr />
+        </div>
+        <div class="col-md-6">
+            <br />
+            <label>CCO</label>
+            <input required="required" runat="server" id="Cco" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+            <hr />
+        </div>
+        <hr />
+
+        <div style="text-align: center; padding-top: 2em; border-top: 1px solid rgb(153, 202, 129); margin-top: 1em; float: left; width: 100%;">
+            <input type="button" onclick="return btnEnviartec()" value="Enviar" class="wpcf7-form-control wpcf7-submit">
+            <input type="button" onclick="return btnRechazar()" value="Rechazar" class="wpcf7-form-control wpcf7-submit">
+            <input type="hidden" name="identificador">
+            <input type="reset" value="Borrar">
+            <input id="user" type="hidden" value="@Model.user" />
+        </div>
+    }
+    else
+    {
+        <h1>Usuario no valido !!</h1>
+    }
+</body>
+
+
+@*<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>*@
+<script type="text/javascript" charset="utf-8" src='@Url.Content("~/Scripts/js/Tecnologia.js")'></script>
+<script type="text/javascript" charset="utf-8" src='@Url.Content("~/Scripts/js/Gestion.js")'></script>

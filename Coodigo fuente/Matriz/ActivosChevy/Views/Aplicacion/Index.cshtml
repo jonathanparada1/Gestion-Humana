@@ -1,0 +1,168 @@
+@model ActivosChevy.Models.AplicacionModel
+@{
+    ViewBag.Title = "Aplicacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head runat="server">
+    <title>Matriz</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">*@
+
+    <style>
+        .off {
+            display: none;
+        }
+
+        .color_blue_chevy {
+            background-color: #094997;
+            color: white;
+        }
+
+        h1 {
+            font-size: 25px !important;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <hr />
+    <div class="container">
+        <div class="row">
+            <form id="loginForm" runat="server">
+                <div class="col-md-12">
+                    <div class="col-md-8" style="padding-left: 5px;">
+                        <h1 class="color_blue_chevy" style="padding-left: 120px;">SOLICITUD CREACIÓN CUENTAS DE USUARIO</h1>
+
+                    </div>
+                    <div class="col-md-4 ">
+                        <img style="background-color: white;" width="250px" height="50px" src="../images/logo.png" />
+                    </div>
+                </div>
+                <div class="col-md-12 text-right" style="padding-right: 43px">
+                    <br />
+                    <h2> - @DateTime.Now.Date - </h2>
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="col-md-12 text-center ">
+                        <h4 class="color_blue_chevy">Persona Solicitante</h4>
+                    </div>
+                  <div class="col-md-12 text-center">
+                        <br />
+                        <label>Número de Documento Identidad</label>
+                        <input required="required" runat="server" id="Ndocuemnto" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                        <hr />
+
+                    </div>
+                    <div class="col-xs-6">
+                        
+                        <label>Nombre </label>
+                        <input runat="server" id="Nombre" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                        <hr />
+                        <label>Cargo</label>
+                        <input runat="server" id="Cargo" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                        <hr />
+                       
+                    </div>
+                    <div class="col-xs-6">
+                         <label>Apellido </label>
+                        <input runat="server" id="Apellidos" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                        <hr />
+                        
+                        <label>Área</label>
+                        <input runat="server" id="Area" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                        <hr />
+
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12 text-center ">
+                    <h4 class="color_blue_chevy">Aplicaciones Autorizadas</h4>
+                </div>
+                <div class="col-md-5">
+                    <label>CORREO</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label style="text-align: center;">SICO</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label>SIIGO WINDOWS</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label style="text-align: center;">IN-PROCESS</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label>EPICOR</label>
+                    <input type="checkbox" />
+                    <br />
+                </div>
+                <div class="col-md-4">
+                    <label style="text-align: center;">VENTAS</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label>VENTAS ONLINE</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label style="text-align: center;">UNIFIED IP</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label>PSL</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label style="text-align: center;">DOC LINK</label>
+                    <input type="checkbox" />
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <label>SEVENET</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label style="text-align: center;">SICO WEB</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label>CRM</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label style="text-align: center;">PROSPECTOS</label>
+                    <input type="checkbox" />
+                    <br />
+                    <label>CHEVYSAT</label>
+                    <input type="checkbox" />
+                    <br />
+                </div>
+
+                <br />
+                <div class="col-md-12 text-center ">
+                    <p>
+                        <label>Por Favor, Introduzca Sus Observaciones: </label>
+                        <br>
+                        <textarea rows="3" cols="150" name="txtsugerencias" id="OBSERVACIONES"></textarea><br>
+                        <input type="hidden" name="identificador"><br>
+                      <input type="button" onclick="return BuscarDirector()" value="Buscar" class="wpcf7-form-control wpcf7-submit">
+                        <input type="button" onclick="return btnEnviar()" value="Enviar" class="wpcf7-form-control wpcf7-submit">
+                    </p>
+
+
+                </div>
+
+                <div class="col-md-12 text-center ">
+                    <h4 class="color_blue_chevy">Gracias !</h4>
+                </div>
+        </div>
+        </form>
+    </div>
+    </div>
+   
+</body>
+
+@*<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>*@
+<script  type="text/javascript" charset="utf-8" src='@Url.Content("~/Scripts/js/Aplicacion.js")'></script>

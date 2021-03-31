@@ -1,0 +1,188 @@
+@model ActivosChevy.Models.GestionModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head runat="server">
+    <title>Matriz</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">*@
+
+    <style>
+        .off {
+            display: none;
+        }
+
+        .color_blue_chevy {
+            background-color: #094997;
+            color: white;
+        }
+
+        h1 {
+            font-size: 25px !important;
+        }
+    </style>
+</head>
+
+<body onload="BuscarDirector()">
+
+    @if (Model.estado)
+    {
+        <hr />
+        <form id="loginForm" runat="server">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="col-md-8" style="padding-left: 15px;">
+                            <h1 class="color_blue_chevy" style="padding-left: 63px;">SOLICITUD MODIFICACIÓN DE APLICACIONES DE USUARIO</h1>
+                        </div>
+                        <div class="col-md-4 ">
+                            <img style="background-color: white;" width="250px" height="50px" src="../images/logo.png" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right" style="padding-right: 43px">
+                        <br />
+                        <h2>- @DateTime.Now </h2>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 text-center ">
+                            <h4 class="color_blue_chevy">Persona Solicitante</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>Número de Documento Identidad</label>
+                            <input required="required" runat="server" id="Ndocuemnto" disabled class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Nombres </label>
+                            <input runat="server" id="Nombre" class="form-control text-center" disabled autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Cargo</label>
+                            <input runat="server" id="Cargo" class="form-control text-center" disabled autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                        </div>
+                        <div class="col-xs-6">
+                            <br />
+                            <label></label>
+                            <br />
+                            <label></label>
+                            <hr />
+                            <label>Apellidos </label>
+                            <input runat="server" id="Apellidos" class="form-control text-center" disabled autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Área</label>
+                            <input runat="server" id="Area" class="form-control text-center" disabled autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 text-center ">
+                            <h4 class="color_blue_chevy">Información de Usuario</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <br />
+                            <label>Número de Documento Identidad</label>
+                            <input type="button" onclick="return BuscarUsuario()" value="Buscar Usuario" class="wpcf7-form-control wpcf7-submit">
+                            <input required="required" runat="server" id="Identidad" class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Nombres</label>
+                            <input required="required" runat="server" id="SNombre" disabled class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Cargo</label>
+                            <input required="required" runat="server" id="SOCargo" disabled class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                        </div>
+                        <div class="col-md-6">
+                            <br />
+                            <label>Tipo De Contrato</label>
+                            <br />
+                            <input required="required" runat="server" id="SOContrato" disabled class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Apellidos</label>
+                            <input required="required" runat="server" id="Papellido" disabled class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+                            <label>Área/Concesionario</label>
+                            <br />
+                            <input required="required" runat="server" id="SOArea" disabled class="form-control text-center" autopostback="true" ontextchanged="Ndocuemnto_TextChanged" />
+                            <hr />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center ">
+                        <h4 class="color_blue_chevy">Aplicaciones Autorizadas</h4>
+                    </div>
+                    <div class="col-xs-6">
+                        <br />
+                        <br />
+                        <br />
+                        <select id="Sarea" name="0" onclick="return Buscarapp()" class="required" title="*">
+                            <option value="">LISTADO AREAS</option>
+                            @foreach (var item in Model.Area2)
+                            {
+                                <option value="@item.Nombre">@item.Nombre</option>
+
+                            }
+                        </select>
+                        <hr />
+                    </div>
+                    <div class="col-xs-6">
+                        <br />
+                        <br />
+                        <br />
+                        <label></label>
+
+                        <hr />
+                    </div>
+                    <div id="App" class="col-md-12">
+                    </div>
+
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="col-md-12 text-center ">
+                    <p>
+                        <label>Por Favor, Introduzca Sus Observaciones: </label>
+                        <br>
+                        <textarea rows="3" cols="150" name="txtsugerencias" id="OBSERVACIONES"></textarea><br>
+                        <input type="hidden" name="identificador"><br>
+                        <input type="button" onclick="return btnEnviarActivo()" value="Enviar" class="wpcf7-form-control wpcf7-submit">
+                    </p>
+                </div>
+
+                <div class="col-md-12 text-center ">
+                    <h4 class="color_blue_chevy">Gracias !</h4>
+                </div>
+            </div>
+        </form>
+        <input id="gar" type="hidden" />
+        <input id="user" type="hidden" value="@Model.user" />
+    }
+    else
+    {
+        <h1>Usuario no valido !!</h1>
+    }
+</body>
+
+@*<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>*@
+<script type="text/javascript" src='@Url.Content("~/Scripts/js/Gestion.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/js/Aplicacion.js")'></script>
+
+<script type="text/javascript" charset="utf-8" src='@Url.Content("~/Scripts/js/Registroapp.js")'></script>
+
+<script>
+    function exem(x, t) {
+        if ($('#' + t).prop('checked')) {
+            $('#gar').val($('#gar').val() + x + ',');
+        } else {
+            $('#gar').val($('#gar').val().replace(x + ',', ''));
+        }
+    }
+</script>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Matriz">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=sbogche037v;Initial Catalog=Matriz</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>26042c86-6890-4554-8520-129e413de23e</DataSourceID>
+</RptDataSource>
