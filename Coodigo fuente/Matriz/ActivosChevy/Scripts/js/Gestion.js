@@ -173,7 +173,7 @@ function leerTexto(nombre) {
     var control = $(nombre);
     var resultado = null
     if (control != null) {
-        resultado = control.text();// val();
+        resultado = control.val();
 
         if (resultado == '') resultado = null;
 
