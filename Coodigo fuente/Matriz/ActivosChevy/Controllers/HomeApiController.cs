@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Providers.Entities;
 using System.Configuration;
+using AccesoDato.Dao;
 
 namespace ActivosChevy.Controllers
 {
@@ -20,6 +21,27 @@ namespace ActivosChevy.Controllers
             Mail.Service ws = new Mail.Service();
             try
             {
+                IngresoActivo ObjAplicacion = new IngresoActivo();
+                TrasladoDao ObjAplicacionTraslado = new TrasladoDao();
+
+                string nombreAplicaciones = string.Empty;
+
+                string[] Aplicaciones = ObjVista.ID_APLICACION.Split(',');
+
+                for (int i = 0; i < Aplicaciones.Length - 1; i++)
+                {
+                    ObjAplicacion.ID_APLICACION = Aplicaciones[i];
+
+                    if (i != Aplicaciones.Length - 2)
+                    {
+                        nombreAplicaciones += ObjAplicacionTraslado.ConsultarAplicaciones(ObjAplicacion)[0].APLICACION + " , ";
+                    }
+                    else
+                    {
+                        nombreAplicaciones += ObjAplicacionTraslado.ConsultarAplicaciones(ObjAplicacion)[0].APLICACION;
+                    }
+                }
+
                 ObjVista.FECHA = DateTimeOffset.Now.DateTime;
                 ObjVista.FECHA_J = DateTimeOffset.Now.DateTime;
 
@@ -28,7 +50,7 @@ namespace ActivosChevy.Controllers
                     new ChevyPlan.Mail("", ConfigurationManager.AppSettings["Correo"].ToString(), "", "", "Modificación de Usuario",
                         "Cordial Saludo,<br/><br/>Por Favor modificar las aplicaciones del siguiente usuario:<br/><br/>"
                          + "<table class='egt' border='1' width='2050' cellspacing='0' cellpadding='0' style='text-align:center;' >"
-                            +"<tr>"
+                            + "<tr>"
                               + "<th width='850'>IDENTIFICACIÓN</th>"
                               + "<th width='850'>NOMBRES</th>"
                               + "<th width='850'>APELLIDOS</th>"
@@ -37,18 +59,18 @@ namespace ActivosChevy.Controllers
                               + "<th width='1050'>CONCESIONARIO</th>"
                               + "<th width='1050'>APLICACIONES</th>"
                               + "<th width='850'>OBSERVACIONES</th>"
-                            +"</tr>"
-                            +"<tr>"
+                            + "</tr>"
+                            + "<tr>"
                               + "<td width='850'>" + ObjVista.CEDULA + "</td>"
                               + "<td width='850'>" + ObjVista.NOMBRES + "</td>"
                               + "<td width='850'>" + ObjVista.APELLIDOS + "</td>"
                               + "<td width='850'>" + ObjVista.CARGO + "</td>"
                               + "<td width='850'>" + ObjVista.T_CONTRATO + "</td>"
                               + "<td width='1050'>" + ObjVista.AREA + "</td>"
-                              + "<td width='1050'>" + ObjVista.ID_APLICACION+ "</td>"
+                              + "<td width='1050'>" + nombreAplicaciones + "</td>"
                               + "<td width='850'>" + ObjVista.OBSERVACIONES + "</td>"
-                            +"</tr>"
-                         +"</table>"
+                            + "</tr>"
+                         + "</table>"
                         + "<br/><br/>Coordialmente,<br/><br/>"
                         + "<label style=\"font-size:15px; color: #0040FF; font-family: arial;\">"
                         + "Área de Sistemas </label> <br>"

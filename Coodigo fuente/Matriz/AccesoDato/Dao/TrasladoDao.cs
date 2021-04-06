@@ -55,7 +55,6 @@ namespace AccesoDato.Dao
                 reg.AREA = GetString(reader, "AREA");
                 reg.T_CONTRATO = GetString(reader, "TIPO");
                 reg.C_OFICINA = GetString(reader, "C_OFICINA");
-              //  reg.NOMBRECOMPLETO = GetString(reader, "NOMBRECOMPLETO");
 
                 lista.Add(reg);
             }
@@ -71,16 +70,9 @@ namespace AccesoDato.Dao
             {
                 var reg = new Traslado();
                 reg.CEDULA = Convert.ToInt32(GetString(reader, "CEDULA"));
-                //reg.NOMBRES = GetString(reader, "NOMBRES");
-                //reg.APELLIDOS = GetString(reader, "APELLIDOS");
-                //reg.CARGO = GetString(reader, "CARGO");
-                //reg.AREA = GetString(reader, "AREA");
-                //reg.T_CONTRATO = GetString(reader, "TIPO");
-                //reg.C_OFICINA = GetString(reader, "C_OFICINA");
                 reg.NOMBRECOMPLETO = GetString(reader, "NOMBRECOMPLETO");
 
                 lista.Add(reg);
-
             }
             return lista;
         }
@@ -141,6 +133,37 @@ namespace AccesoDato.Dao
 
             return id;
 
+        }
+
+        public IList<IngresoActivo> ConsultarAplicaciones(IngresoActivo Obj)
+        {
+            IList<IngresoActivo> lista;
+            Database db = CreateDatabase();
+            Obj.PROCEDIMIENTO = "SP_ConsultaAplicaciones";
+            using (DbCommand cmd = db.GetStoredProcCommand(Obj.PROCEDIMIENTO))
+            {
+                    db.AddInParameter(cmd, "@ID_APLICACION", DbType.String, Obj.ID_APLICACION);
+
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    lista = LeerReader3(reader);
+                }
+            }
+            return lista;
+        }
+
+        public static IList<IngresoActivo> LeerReader3(IDataReader reader)
+        {
+            IList<IngresoActivo> lista = new List<IngresoActivo>();
+            while (reader.Read())
+            {
+                var reg = new IngresoActivo();
+
+                reg.APLICACION = GetString(reader, "APLICACION");
+
+                lista.Add(reg);
+            }
+            return lista;
         }
     }
 }

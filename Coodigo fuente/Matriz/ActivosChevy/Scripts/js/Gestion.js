@@ -15,8 +15,7 @@ function leerDatos2() {
     reg.AREA_J = leerTexto('#Area')
     reg.APELLIDOS_J = leerTexto('#Apellidos')
     reg.CEDULA_JEFE = leerTexto('#Ndocuemnto')
-    //reg.ID_APLICACION = leerTexto('#gar')
-    reg.APLICACION = leerTexto('#gar')
+    reg.ID_APLICACION = leerTexto('#gar')
     reg.USER = leerTexto('#user')
     reg.AREA_P = leerTexto('#Sarea')
 
@@ -93,6 +92,7 @@ function BuscarUsuario() {
         }
     })
 }
+
 
 function BuscarCreado() {
     reg = {};

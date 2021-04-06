@@ -30,6 +30,7 @@ namespace Dominio.Dao
         public string ID_APLICACION { get; set; }
         public string USER { get; set; }
         public string CORREO { get; set; }
-
+        public string PROCEDIMIENTO { get; set; }
+        public string APLICACION { get; set; }
     }
 }

@@ -427,6 +427,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccesoDato\AccesoDato.csproj">
+      <Project>{0E560E68-E724-43A0-B347-8ED3DA26B4FC}</Project>
+      <Name>AccesoDato</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contrato\Contrato.csproj">
       <Project>{245503e5-f390-40f0-abba-242b37a0ea00}</Project>
       <Name>Contrato</Name>
