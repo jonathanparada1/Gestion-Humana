@@ -50,14 +50,14 @@ namespace ActivosChevy.Controllers
                 {
 
                     //Servidor
-                    //model.estado = true;
-                    //model.user = DesEncriptar.Descifrar(FormatoUsuario.ToString().Replace(' ', '+'));
-                    //Usuario.UsuarioSession = model.user;
+                    model.estado = true;
+                    model.user = DesEncriptar.Descifrar(FormatoUsuario.ToString().Replace(' ', '+'));
+                    Usuario.UsuarioSession = model.user;
 
                     // Local
-                    model.estado = true;
-                    model.user = FormatoUsuario;
-                    Usuario.UsuarioSession = model.user;
+                    //model.estado = true;
+                    //model.user = FormatoUsuario;
+                    //Usuario.UsuarioSession = model.user;
                 }
             }
             else

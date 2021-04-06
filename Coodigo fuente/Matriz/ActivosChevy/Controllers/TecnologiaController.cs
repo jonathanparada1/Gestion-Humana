@@ -34,14 +34,14 @@ namespace ActivosChevy.Controllers
                 }
                 else
                 {
-                    ////Servidor
-                    //model.estado = true;
-                    //model.user = DesEncriptar.Descifrar(FormatoUsuario.ToString().Replace(' ', '+'));
+                    //Servidor
+                    model.estado = true;
+                    model.user = DesEncriptar.Descifrar(FormatoUsuario.ToString().Replace(' ', '+'));
 
                     //Local
-                    model.estado = true;
-                    model.user = FormatoUsuario;
-                    Usuario.UsuarioSession = model.user;
+                    //model.estado = true;
+                    //model.user = FormatoUsuario;
+                    //Usuario.UsuarioSession = model.user;
                 }
                 }
             else
